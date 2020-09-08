@@ -3,11 +3,20 @@ package dao
 import "time"
 
 type ServiceEntity struct {
-  ID          uint32  `gorm:"primary_key"`
+  ID          uint32
   Name        string
   Description string
   Role        string
   Destination string
-  NoticeType
+  NoticeType  string
   CreatedAt   time.Time
+}
+
+func (ServiceEntity) TableName() string {
+  return "tbl_service"
+}
+
+type ServiceDAO interface {
+  create(service *ServiceEntity) error
+
 }
